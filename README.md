@@ -30,6 +30,7 @@ Here we will create a TabView, and another TabView which inherits from the first
 	</ul>
 </div>
 
+<!-- Here is an AjaxTabView, which may have different functionality from a normal TabView. -->
 <div data-js="AjaxTabView.toggle">
 	<ul>
 		<li><a href="#tab1">Tab 1</a></li>
@@ -39,7 +40,8 @@ Here we will create a TabView, and another TabView which inherits from the first
 </div>
 
 <script type="text/javascript">
-
+ 
+// All classes should extend view
 Semantics.extend('View', {
 
 	name: 'TabView',
@@ -51,6 +53,9 @@ Semantics.extend('View', {
 	}
 });
 
+
+// Alternatively, we can extend any previous class that we have created
+// Notice how the first argument maps to the name of the TabView object we created earlier.
 Semantics.extend('TabView', {
 	name: 'AjaxTabView',
 
@@ -63,5 +68,4 @@ Semantics.extend('TabView', {
 		}
 	}
 });
-
 ```
