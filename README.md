@@ -68,4 +68,5 @@ Semantics.extend('TabView', {
 		}
 	}
 });
+</script>
 ```
