@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript" src="../semantics.min.js"></script>
+</head>
+<body>
+	
+<div class="tabview" data-js="TabView.toggle">
+	<ul>
+		<li><a href="#tab1">Tab 1</a></li>
+		<li><a href="#tab2">Tab 2</a></li>
+		<li><a href="#tab3">Tab 3</a></li>
+	</ul>
+</div>
+
+<div class="tabview" data-js="AjaxTabView.toggle">
+	<ul>
+		<li><a href="#tab1">Tab 1</a></li>
+		<li><a href="#tab2">Tab 2</a></li>
+		<li><a href="#tab3">Tab 3</a></li>
+	</ul>
+</div>
+
+<script type="text/javascript">
+
+Semantics.extend('View', {
+
+	name: 'TabView',
+
+	methods: {
+		toggle: function(el) {
+			console.log('Toggling regular tab view.', el);
+		}
+	}
+});
+
+Semantics.extend('TabView', {
+	name: 'AjaxTabView',
+
+	methods: {
+		toggle: function(el) {
+			console.log('Toggling ajax tab view', el);
+			this._super();
+		}
+	}
+});
+
+</script>
+
+</body>
+</html>

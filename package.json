@@ -1,0 +1,19 @@
+{
+	"name": "semantics",
+	"version": "0.0.1",
+	"description": "Semantics.js is a framework which provides structure for your javascript needs. It allows you to defines and implements semantics which will in turn control user interaction of the page.",
+	"keywords": ["semantics"],
+	"homepage": "http://nwtjs.org",
+	"author": "Kevin Grandon <kevingrandon@yahoo.com> (https://github.com/KevinGrandon/)",
+	"dependencies": {
+		"uglify-js" : "*"
+		, "nwtui" : "*"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/nwtjs/semantics.git"
+	},
+	"engines": {
+		"node": ">=0.6.0"
+	}
+}
