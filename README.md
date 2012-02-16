@@ -60,7 +60,12 @@ Semantics.extend('TabView', {
 	name: 'AjaxTabView',
 
 	methods: {
-		toggle: function(el) {
+
+		/**
+		 * The first argument of the method is the link that the user interacted with (click, mouseover, etc)
+		 * The second argument is the element which captured the event. In this case, the <ul> element.
+		 */
+		toggle: function(el, container) {
 			console.log('We are toggling an ajax tab view', el);
 
 			// Call the toggle method of a regular tab view.

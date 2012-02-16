@@ -4,22 +4,43 @@
 	<script type="text/javascript" src="../semantics.min.js"></script>
 </head>
 <body>
-	
-<div class="tabview" data-js="TabView.toggle">
-	<ul>
-		<li><a href="#tab1">Tab 1</a></li>
-		<li><a href="#tab2">Tab 2</a></li>
-		<li><a href="#tab3">Tab 3</a></li>
-	</ul>
-</div>
 
-<div class="tabview" data-js="AjaxTabView.toggle">
-	<ul>
-		<li><a href="#tab1">Tab 1</a></li>
-		<li><a href="#tab2">Tab 2</a></li>
-		<li><a href="#tab3">Tab 3</a></li>
+<table><tr><td>	
+	<div class="tabview" data-js="TabView.toggle">
+		<ul>
+			<li><a href="#tab1">Tab 1</a></li>
+			<li><a href="#tab2">Tab 2</a></li>
+			<li><a href="#tab3">Tab 3</a></li>
+		</ul>
+	</div>
+	
+	<div class="tabview" data-js="AjaxTabView.toggle">
+		<ul>
+			<li><a href="#tab1">Tab 1</a></li>
+			<li><a href="#tab2">Tab 2</a></li>
+			<li><a href="#tab3">Tab 3</a></li>
+		</ul>
+	</div>
+</td>
+<td>
+	<ul data-mouse="MouseList.clear">
+		<li>asdf</li>
+		<li>asdf</li>
+		<li>asdf</li>
+		<li>asdf</li>
+		<li>asdf</li>
+		<li>asdf</li>
+		<li>asdf</li>
 	</ul>
-</div>
+</td>
+<td>
+	<div data-scroll="ScrollDiv.scroll" style="height:60px; overflow-y:scroll;">
+		asdfasdf<br>asdfasdf<br>asdfasdf<br>asdfasdf<br>asdfasdf<br>asdfasdf<br>asdfasdf<br>asdfasdf<br>asdfasdf<br>asdfasdf<br>asdfasdf<br>asdfasdf<br>
+		asdfasdf<br>asdfasdf<br>asdfasdf<br>asdfasdf<br>asdfasdf<br>asdfasdf<br>asdfasdf<br>asdfasdf<br>asdfasdf<br>asdfasdf<br>asdfasdf<br>asdfasdf<br>
+	</div>
+</td>
+</tr>
+</table>
 
 <script type="text/javascript">
 
@@ -44,6 +65,29 @@ Semantics.extend('TabView', {
 		}
 	}
 });
+
+Semantics.extend('View', {
+
+	name: 'MouseList',
+
+	methods: {
+		clear: function(el, container) {
+			el.setContent('bbq');
+		}
+	}
+});
+
+Semantics.extend('View', {
+
+	name: 'ScrollDiv',
+
+	methods: {
+		scroll: function(el, container) {
+			console.log(el.get('scrollTop'));
+		}
+	}
+});
+
 
 </script>
 

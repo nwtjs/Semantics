@@ -12,30 +12,9 @@ classes.View = new View();
  * @constructor
  */
 function SemanticsJS() {
-
-	// Add the single event listener
-	nwt.ready(function(){
-		nwt.one('body').on('click', function(e) {
-
-			var initialNode = e.target,
-				currNode = e.target;
-
-			while(true) {
-
-				if (currNode.data('js')) {
-					Semantics.dispatch(initialNode, currNode);
-					break;
-				}
-
-				// Iterate up through the dom
-				currNode = currNode.parent();
-
-				if( !currNode ) {
-					break;
-				}
-			}
-		});
-	});
+	this.CLICK_ATTR = 'js';
+	this.MOUSE_ATTR = 'mouse';
+	this.SCROLL_ATTR = 'scroll';
 }
 
 SemanticsJS.prototype = {
@@ -46,9 +25,31 @@ SemanticsJS.prototype = {
 		 * Possibilities are: scroll, mousemove
 		 * @param string Type of listener to enable
 		 * @param string data- attribute to assign the listener to
+		 * @param integer Max number of parents to ascend (defaults to unlimited)
 		 */
-		enable: function() {
-			
+		enable: function(action, dataAttr, limit) {
+			nwt.one('body').on(action, function(e) {
+
+				var initialNode = e.target,
+					currNode = e.target,
+					i = 1;
+
+				while(true) {
+
+					if (currNode.data(dataAttr)) {
+						Semantics.dispatch(initialNode, currNode, dataAttr);
+						break;
+					}
+
+					// Iterate up through the dom
+					currNode = currNode.parent();
+
+					if( !currNode || i > limit ) {
+						break;
+					}
+					i++;
+				}
+			});
 		},
 
 		/**
@@ -65,8 +66,8 @@ SemanticsJS.prototype = {
 		 * @param object Target (clicked) element
 		 * @param object Callback element, or element we found with the disoatched class
 		 */
-		dispatch: function(targetEl, callbackEl) {
-			var className = callbackEl.data('js'),
+		dispatch: function(targetEl, callbackEl, dataAttr) {
+			var className = callbackEl.data(dataAttr),
 				parts = className.split('.'),
 				numParts = parts.length,
 				i,
@@ -101,7 +102,7 @@ SemanticsJS.prototype = {
 				}
 			}
 
-			callback.apply(userClass, [Semantics.getNode(targetEl)]);
+			callback.apply(userClass, [Semantics.getNode(targetEl), Semantics.getNode(callbackEl)]);
 		},
 
 		
@@ -125,5 +126,16 @@ SemanticsJS.prototype = {
 			framework = type.toLowerCase();
 		}
 };
+
+
+// Enable click and mousemove listeners on page load
+nwt.ready(function(){
+	Semantics.enable('click', Semantics.CLICK_ATTR);
+	Semantics.enable('mousemove', Semantics.MOUSE_ATTR, 1);
+
+	// Scroll is not enabled by default because it doesn't bubble
+	// The use should be careful about using scoll dispatch anyway
+	// Semantics.enable('scroll', Semantics.SCROLL_ATTR);
+});
 
 window.Semantics = new SemanticsJS();
